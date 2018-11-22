@@ -19,7 +19,7 @@ ssh root@host01 'for i in {1..200}; do oc annotate route rhpam7-workshop-rhpamce
 ssh root@host01 'echo "Creating PostgreSQL container in OpenShift." >> ~/script.log'
 ssh root@host01 'for i in {1..200}; do oc new-app --template=postgresql-ephemeral -p NAMESPACE=openshift -p POSTGRESQL_DATABASE="rhpam7_workshop_reporting" -p POSTGRESQL_USER=postgres -p POSTGRESQL_PASSWORD=postgres -n rhpam7-workshop && break || sleep 2; done'
 ssh root@host01 'echo "Creating PostgreSQL ConfigMap for provisioning." >> ~/script.log'
-ssh root@host01 'for i in {1..200}; do oc create configmap postgresql-config-map --from-file=~/.init/provision_data.sh --from-file=~/.init/wait_for_postgres.sh --from-file=~/.init/provision_test_data.sql -n rhpam7-workshop && break || sleep 2; done'
+ssh root@host01 'for i in {1..200}; do oc create configmap postgresql-config-map --from-file=/root/.init/provision_data.sh --from-file=/root/.init/wait_for_postgres.sh --from-file=/root/.init/provision_test_data.sql && break || sleep 2; done'
 ssh root@host01 'echo "Setting PostgreSQL volume." >> ~/script.log'
 ssh root@host01 'for i in {1..200}; do oc volume dc/postgresql --name=postgresql-config-volume --add -m /tmp/config-files -t configmap --configmap-name=postgresql-config-map && break || sleep 2; done'
 ssh root@host01 'echo "Adding PostgreSQL deployment hook." >> ~/script.log'
