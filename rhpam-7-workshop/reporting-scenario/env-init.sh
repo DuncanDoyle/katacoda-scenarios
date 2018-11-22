@@ -1,8 +1,8 @@
 #!/bin/bash
 ssh root@host01 'echo "Importing Red Hat Process Automation Manager 7 Image Streams into OpenShift." >> ~/script.log'
-ssh root@host01 'for i in {1..200}; do oc create -f https://raw.githubusercontent.com/jboss-container-images/rhpam-7-openshift-image/7.1.0.GA/rhpam70-image-streams.yaml -n openshift && break || sleep 2; done'
+ssh root@host01 'for i in {1..200}; do oc create -f https://raw.githubusercontent.com/jboss-container-images/rhpam-7-openshift-image/7.1.0.GA/rhpam71-image-streams.yaml -n openshift && break || sleep 2; done'
 ssh root@host01 'echo "Importing Red Hat Process Automation Manager 7 - Trial template into OpenShift." >> ~/script.log'
-ssh root@host01 'for i in {1..200}; do oc create -f https://raw.githubusercontent.com/jboss-container-images/rhpam-7-openshift-image/7.0.2.GA/templates/rhpam70-trial-ephemeral.yaml -n openshift && break || sleep 2; done'
+ssh root@host01 'for i in {1..200}; do oc create -f https://raw.githubusercontent.com/jboss-container-images/rhpam-7-openshift-image/7.1.0.GA/templates/rhpam71-trial-ephemeral.yaml -n openshift && break || sleep 2; done'
 ssh root@host01 'for i in {1..200}; do oc create -f https://raw.githubusercontent.com/openshift/origin/v3.7.0/examples/db-templates/postgresql-ephemeral-template.json -n openshift && break || sleep 2; done'
 ssh root@host01 'echo "Logging into OpenShift as developer." >> ~/script.log'
 ssh root@host01 'for i in {1..200}; do oc login -u developer -p developer && break || sleep 2; done'
